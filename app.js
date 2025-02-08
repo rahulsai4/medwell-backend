@@ -22,8 +22,8 @@ const authMiddleware = require('./middleware/auth');
 const authRouter = require('./routes/auth');
 const chatRouter = require("./routes/chat");
 
-app.use("/api/v1/auth", authRouter);
-app.use("/api/v1/chat", authMiddleware, chatRouter);
+app.use("/auth", authRouter);
+app.use("/chat", authMiddleware, chatRouter);
 
 app.use(notFoundMiddleware);
 app.use(errorHandlerMiddleware);
