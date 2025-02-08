@@ -1,0 +1,3 @@
+const getChats = (req, res) => {
+    
+}
