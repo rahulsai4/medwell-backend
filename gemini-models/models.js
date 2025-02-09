@@ -6,7 +6,7 @@ if the user has provided somethings completely irrelevent information just ignor
 always provide me minimal but crucial info only.
 make sure to not skip the crucial info.
 `;
-const 
+
 const diagnosisModel = genAI.getGenerativeModel({ 
     model: "gemini-1.5-flash", 
     systemInstruction: 
@@ -16,7 +16,6 @@ const diagnosisModel = genAI.getGenerativeModel({
 
         ${generalInstr}
         
-
         ### Response Guidelines:
         - Possible Causes: List potential conditions or factors (e.g., dehydration, stress, infections).
         - Next Steps: Recommend further evaluation steps, precautions (e.g., lab tests, specialist consultation).
