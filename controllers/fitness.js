@@ -8,18 +8,19 @@ const genAI = new GoogleGenerativeAI(process.env.API_KEY);
 const model = genAI.getGenerativeModel({ 
     model: "gemini-1.5-flash", 
     systemInstruction: 
-    `You are an expert nutritionist specializing in creating personalized diet plans.
-    Based on the following user inputs, provide a well-balanced, customized meal plan and dietary advice:
+    `
+            You are an expert fitness coach specializing in designing personalized exercise routines and wellness strategies.
+        Based on the following user inputs, provide a tailored fitness plan and general wellness advice:
 
-
-    ### Response Guidelines:
-    - Meal Plan: Provide a 7-day meal plan with breakfast, lunch, dinner, and snacks.
-    - Portion Sizes: Include portion sizes and macronutrient breakdowns (e.g., protein, carbs, fats).
-    - Substitutions: Suggest alternatives for restricted foods.
-    - Meal Prep Tips: Offer practical advice for meal preparation and grocery shopping.`
+        ### Response Guidelines:
+        - Workout Plan: Design a weekly workout plan with specific exercises (e.g., cardio, strength training, flexibility).
+        - Warm-Up/Cool-Down: Include warm-up and cool-down routines.
+        - Intensity Adjustment: Adjust intensity based on user metrics and fitness goals.
+        - Recovery Tips: Offer advice for recovery, hydration, and injury prevention.
+    `
 });
 
-const dietChat = async (req, res) => {
+const fitnessChat = async (req, res) => {
     
     const userId = req.user.userId;
     const user = await User.findById(userId);
@@ -28,7 +29,7 @@ const dietChat = async (req, res) => {
 
 
     // get all diagnose chats of user
-    let prevChat = await Chat.findOne({ userId, chatType: 'diet' });
+    let prevChat = await Chat.findOne({ userId, chatType: 'fitness' });
 
     if(!prevChat){
         const his = {
@@ -36,7 +37,7 @@ const dietChat = async (req, res) => {
             parts: [{ text: userData}],
         }
 
-        prevChat = await Chat.create({userId, chatType: "diet", history:[his]});
+        prevChat = await Chat.create({userId, chatType: "fitness", history:[his]});
     } 
 
     // use the history of the diagnose chat
@@ -51,7 +52,7 @@ const dietChat = async (req, res) => {
     
     // set chats of user to current chat._history
     let updatedChat = await Chat.findOneAndUpdate(
-        { userId, chatType: 'diet' }, 
+        { userId, chatType: 'fitness' }, 
         { $set: { history :  chat._history} },
         {new : true}
     );
@@ -60,4 +61,4 @@ const dietChat = async (req, res) => {
     res.status(200).json({reply})
 }
 
-module.exports = dietChat;
+module.exports = fitnessChat;
