@@ -8,6 +8,10 @@ app.use(express.json())
 const cors = require('cors');
 app.use(cors());
 
+const morgan = require("morgan");
+app.use(morgan("dev"));
+
+
 app.get("/", (req, res) => res.send("test"));
 
 const connectDB = require('./db/connect');
