@@ -2,24 +2,7 @@ const axios = require("axios");
 const Chat = require('../models/Chat')
 const User = require('../models/User')
 
-const { GoogleGenerativeAI } = require("@google/generative-ai");
-
-const genAI = new GoogleGenerativeAI(process.env.API_KEY);
-const model = genAI.getGenerativeModel({ 
-    model: "gemini-1.5-flash", 
-    systemInstruction: 
-    `
-            You are an expert doctor specializing in diagnosing symptoms and providing evidence-based health advice.
-        Based on the following symptoms, suggest possible causes, next steps for evaluation, dietary adjustments, and lifestyle tips:
-
-        if the user has provided somethings completely irrelevent information just ignore it and point the user to provide relevant info only and make sure the reply is small
-        
-        ### Response Guidelines:
-        - Possible Causes: List potential conditions or factors (e.g., dehydration, stress, infections).
-        - Next Steps: Recommend further evaluation steps, precautions (e.g., lab tests, specialist consultation).
-        - Dietary Adjustments: Suggest foods or hydration strategies to alleviate symptoms
-        `
-});
+const {diagnosisModel} = require("../gemini-models/models");
 
 const diagnoseChat = async (req, res) => {
     
@@ -41,7 +24,7 @@ const diagnoseChat = async (req, res) => {
     } 
 
     // use the history of the diagnose chat
-    const chat = model.startChat({
+    const chat = diagnosisModel.startChat({
         history: prevChat.history || []
     });
 

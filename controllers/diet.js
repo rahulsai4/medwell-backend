@@ -2,26 +2,7 @@ const axios = require("axios");
 const Chat = require('../models/Chat')
 const User = require('../models/User')
 
-const { GoogleGenerativeAI } = require("@google/generative-ai");
-
-const genAI = new GoogleGenerativeAI(process.env.API_KEY);
-const model = genAI.getGenerativeModel({ 
-    model: "gemini-1.5-flash", 
-    systemInstruction: 
-    `You are an expert nutritionist specializing in creating personalized diet plans.
-    Based on the following user inputs, provide a well-balanced, customized meal plan and dietary advice:
-
-    if the user has provided somethings completely irrelevent information just ignore it and point the user to provide relevant info only and make sure the reply is small
-
-    ### Response Guidelines:
-    - Meal Plan: Provide a 7-day meal plan with breakfast, lunch, dinner, and snacks.
-    - Portion Sizes: Include portion sizes and macronutrient breakdowns (e.g., protein, carbs, fats).
-    - Substitutions: Suggest alternatives for restricted foods.
-    - Meal Prep Tips: Offer practical advice for meal preparation and grocery shopping.
-    `
-    
-    
-});
+const {dietModel} = require("../gemini-models/models");
 
 const dietChat = async (req, res) => {
     
@@ -44,7 +25,7 @@ const dietChat = async (req, res) => {
     } 
 
     // use the history of the diagnose chat
-    const chat = model.startChat({
+    const chat = dietModel.startChat({
         history: prevChat.history || []
     });
 
