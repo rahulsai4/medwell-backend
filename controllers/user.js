@@ -1,8 +1,7 @@
 const User = require("../models/User");
 
 const updateUser = async (req, res) => {
-    const userId = req.user.userId;
-    
+    const userId = req.params.id;
     
     const updatedUser = await User.findByIdAndUpdate(userId, req.body, {
         new: true,

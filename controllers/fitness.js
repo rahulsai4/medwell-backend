@@ -26,7 +26,7 @@ const fitnessChat = async (req, res) => {
     const userId = req.user.userId;
     const user = await User.findById(userId);
 
-    const userData = "patient data " + JSON.stringify({height: user.height, weight: user.weight, age: user.age, gender: user.gender, diseases: user.diseases});
+    const userData = "patient data " + JSON.stringify(user);
 
 
     // get all diagnose chats of user
