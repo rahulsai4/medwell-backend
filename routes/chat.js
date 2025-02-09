@@ -9,6 +9,6 @@ router.get("/getAllChats", getAllChats)
     .get("/getDietChat", getDietChat)
     .get("/getFitnessChat", getFitnessChat);
 
-router.get("/diagnose", diagnoseChat);
+router.post("/diagnose", diagnoseChat);
 
 module.exports = router;
