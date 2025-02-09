@@ -40,7 +40,14 @@ const UserSchema = new mongoose.Schema({
     default:75
   },
 
-  diseases:[String]
+  diseases:{
+    type: [String],
+    default: []
+  },
+  allergies:{
+    type: [String],
+    default: []
+  }
 })
 
 UserSchema.pre('save', async function () {

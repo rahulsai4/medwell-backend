@@ -17,6 +17,7 @@ const model = genAI.getGenerativeModel({
         - Warm-Up/Cool-Down: Include warm-up and cool-down routines.
         - Intensity Adjustment: Adjust intensity based on user metrics and fitness goals.
         - Recovery Tips: Offer advice for recovery, hydration, and injury prevention.
+        if the user has provided somethings completely irrelevent information just ignore it and point the user to provide relevant info only and make sure the reply is small
     `
 });
 

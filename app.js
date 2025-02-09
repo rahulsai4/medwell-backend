@@ -21,9 +21,11 @@ const authMiddleware = require('./middleware/auth');
 // routers
 const authRouter = require('./routes/auth');
 const chatRouter = require("./routes/chat");
+const userRouter = require("./routes/user");
 
 app.use("/auth", authRouter);
 app.use("/chat", authMiddleware, chatRouter);
+app.use("/user", authMiddleware, userRouter);
 
 app.use(notFoundMiddleware);
 app.use(errorHandlerMiddleware);

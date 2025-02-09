@@ -16,7 +16,11 @@ const model = genAI.getGenerativeModel({
     - Meal Plan: Provide a 7-day meal plan with breakfast, lunch, dinner, and snacks.
     - Portion Sizes: Include portion sizes and macronutrient breakdowns (e.g., protein, carbs, fats).
     - Substitutions: Suggest alternatives for restricted foods.
-    - Meal Prep Tips: Offer practical advice for meal preparation and grocery shopping.`
+    - Meal Prep Tips: Offer practical advice for meal preparation and grocery shopping.
+    if the user has provided somethings completely irrelevent information just ignore it and point the user to provide relevant info only and make sure the reply is small
+    `
+    
+    
 });
 
 const dietChat = async (req, res) => {
