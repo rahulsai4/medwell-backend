@@ -4,6 +4,11 @@ const jwt = require('jsonwebtoken')
 const { type } = require('os')
 
 const UserSchema = new mongoose.Schema({
+  role:{
+    type:String,
+    enum:['doctor','user'],
+    required: true
+  },
   name: {
     type: String,
     required: [true, 'Please provide name'],

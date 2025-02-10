@@ -39,8 +39,6 @@ const diagnoseChat = async (req, res) => {
         { $set: { history :  chat._history} },
         {new : true}
     );
-
-    
     res.status(200).json({reply})
 }
 
